@@ -32,12 +32,12 @@ println(pickNDistinct(1,40,7)) // for example [3, 6, 11, 17, 19, 21, 34]
 println(pickNDistinct(1,6,3)) // for example [1, 3, 6]
 println(pickNDistinct(1,6,6)) // [1, 2, 3, 4, 5, 6]
 */
-fun pickNDistinct(low: Int, high: Int, n: Int){
+fun pickNDistinct(low: Int, high: Int, n: Int): List<Int>{
     val numbers = mutableSetOf<Int>()
     do{
         numbers.add(pickNumber(low, high))
     } while(numbers.size < n)
-    println(numbers.sorted().toList())
+    return numbers.sorted().toList()
 }
 
 /*
@@ -48,6 +48,9 @@ Example runs:
 println(numDistinct(listOf(1,1,1,2,3,4,5,6,6,6))) // 6
 println(numDistinct(pickNDistinct(1,40,7))) // 7
 */
+fun numDistinct(list: List<Int>): Int{
+    return list.distinct().count()
+}
 
 /*
 Write function numCommon(list1: List<Int>, list2: List<Int>) that returns
@@ -58,6 +61,9 @@ println(numCommon(listOf(1,2,3,4), listOf(2,4))) // 2
 println(numCommon(listOf(1, 1, 1, 2, 3), listOf(1, 2))) // 2
 println(numCommon(listOf(4, 3, 2), listOf(1, 4, 1, 1, 2, 3))) // 3
 */
+fun numCommon(list1: List<Int>, list2: List<Int>): Int{
+    return list1.intersect(list2).count()
+}
 
 /*
 Write function readNDistinct(low: Int, high: Int, n: Int): List<Int> that reads from console a line
@@ -65,6 +71,9 @@ that contains n distinct integer numbers ranging from low and high (inclusive), 
 You may assume low <= high and n <= number of distinct values.
 Hints: use readLine(), .split(), check .toIntOrNull(), .filterNotNull() and .all { ... }
 */
+fun readNDistinct(low: Int, high: Int, n: Int): List<Int>{
+    
+}
 
 /*
 Write function playLotto() that
@@ -111,5 +120,5 @@ fun lottoResult(guess: List<Int>, lotto: List<Int>) =
     }
 */
 fun main(args: Array<String>) {
-    pickNDistinct(1,40,7);
+  println(numCommon(listOf(1,1,2,3,4,5), listOf(1,3,6,5,2,2,2,2,2,2)))
 }
