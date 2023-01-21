@@ -71,16 +71,14 @@ that contains n distinct integer numbers ranging from low and high (inclusive), 
 You may assume low <= high and n <= number of distinct values.
 Hints: use readLine(), .split(), check .toIntOrNull(), .filterNotNull() and .all { ... }
 */
-fun readNDistinct(low: Int, high: Int, n: Int){
-    println("Give numbers separated by comma:")
-    var givennumbers: List<Int>?
+fun readNDistinct(low: Int, high: Int, n: Int): List<Int>{
+    println("Give numbers separated by comma")
+    var numbers: List<Int>?
     do{
-        givennumbers = readLine()?.split(",")?.map{it.trim().toIntOrNull()}?.toList()?.toSet()?.filterNotNull()
-        var numbers: List<Int> = givennumbers.toIntOrNull().toList()
-    } while(numbers.size < n)
-    println("Given numbers: ${givennumbers}")
-    // println("Given numbers: ${givennumbers.size}")
-    //return givennumbers
+        numbers = readLine()?.split(",")?.map{it.toIntOrNull()}?.filterNotNull()?.toSet()?.toList()
+        if (numbers?.indexOfFirst{it > high} != null) numbers = readLine()?.split(",")?.map{it.toIntOrNull()}?.filterNotNull()?.toSet()?.toList()
+    } while(numbers?.size != n)
+    return numbers?.toList() ?: listOf(0,0,0)
 }
 
 /*
@@ -128,5 +126,5 @@ fun lottoResult(guess: List<Int>, lotto: List<Int>) =
     }
 */
 fun main(args: Array<String>) {
-  readNDistinct(1,40,7)
+  println(readNDistinct(1,40,7))
 }
