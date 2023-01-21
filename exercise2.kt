@@ -71,8 +71,16 @@ that contains n distinct integer numbers ranging from low and high (inclusive), 
 You may assume low <= high and n <= number of distinct values.
 Hints: use readLine(), .split(), check .toIntOrNull(), .filterNotNull() and .all { ... }
 */
-fun readNDistinct(low: Int, high: Int, n: Int): List<Int>{
-    
+fun readNDistinct(low: Int, high: Int, n: Int){
+    println("Give numbers separated by comma:")
+    var givennumbers: List<Int>?
+    do{
+        givennumbers = readLine()?.split(",")?.map{it.trim().toIntOrNull()}?.toList()?.toSet()?.filterNotNull()
+        var numbers: List<Int> = givennumbers.toIntOrNull().toList()
+    } while(numbers.size < n)
+    println("Given numbers: ${givennumbers}")
+    // println("Given numbers: ${givennumbers.size}")
+    //return givennumbers
 }
 
 /*
@@ -120,5 +128,5 @@ fun lottoResult(guess: List<Int>, lotto: List<Int>) =
     }
 */
 fun main(args: Array<String>) {
-  println(numCommon(listOf(1,1,2,3,4,5), listOf(1,3,6,5,2,2,2,2,2,2)))
+  readNDistinct(1,40,7)
 }
