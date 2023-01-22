@@ -72,7 +72,7 @@ You may assume low <= high and n <= number of distinct values.
 Hints: use readLine(), .split(), check .toIntOrNull(), .filterNotNull() and .all { ... }
 */
 fun readNDistinct(low: Int, high: Int, n: Int): List<Int>{
-    println("Give numbers separated by comma")
+    println("Give ${n} numbers separated by comma")
     var numbers: List<Int>?
     do{
         numbers = readLine()?.split(",")?.map{it.toIntOrNull()}?.filterNotNull()?.toSet()?.toList()
@@ -88,7 +88,17 @@ Write function playLotto() that
 - prints the number of correctly guessed numbers (use numCommon() for this)
 - lets user either continue with another round or end
 - call your playLotto implementation from main function
+*/ 
+fun playLotto(){
+    var correct = pickNDistinct(1,40,7)
+    var guess = readNDistinct(1,40,7)
+    println("Correctly guessed numbers:${numCommon(correct,guess)}")
+    println("Do you want to play again? (Y/N)")
+    var more = readLine()
+    if (more == "Y" || more == "y") playLotto()
+}
 
+/* 
 Example runs (here computer guess (next exercise) is implemented also):
 Give numbers separated by commas: 1,,2,3,4,5,6,7
 Give numbers separated by commas: 1,2,3,4,5,6,7,8
@@ -125,6 +135,7 @@ fun lottoResult(guess: List<Int>, lotto: List<Int>) =
         null
     }
 */
+
 fun main(args: Array<String>) {
-  println(readNDistinct(1,40,7))
+  playLotto()
 }
