@@ -73,10 +73,10 @@ Hints: use readLine(), .split(), check .toIntOrNull(), .filterNotNull() and .all
 */
 fun readNDistinct(low: Int, high: Int, n: Int): List<Int>{
     println("Give ${n} numbers separated by comma")
-    var input = readLine()?.split(",")?.map{it.toIntOrNull()}?.filterNotNull()?.toSet()?.toList()
     var numbers: List<Int>?
     do{
-        numbers = input
+        var input = readLine()
+        numbers = input?.split(",")?.map{it.toIntOrNull()}?.filterNotNull()?.toSet()?.toList()
         if (numbers?.indexOfFirst{it > high} != null) input
     } while(numbers?.size != n)
     return numbers ?: listOf(0,0,0)
