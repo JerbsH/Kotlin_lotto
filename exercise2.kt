@@ -78,7 +78,7 @@ fun readNDistinct(low: Int, high: Int, n: Int): List<Int>{
         var input = readLine()
         numbers = input?.split(",")?.map{it.toIntOrNull()}?.filterNotNull()?.toSet()?.toList()?.filter { it in low..high }
     } while(numbers?.size != n)
-    return numbers ?: listOf(0,0,0)
+    return numbers
 }
 
 /*
@@ -92,7 +92,8 @@ Write function playLotto() that
 fun playLotto(){
     var correct = pickNDistinct(1,40,7)
     var guess = readNDistinct(1,40,7)
-    println("Correctly guessed numbers:${numCommon(correct,guess)}")
+    val (steps, lotto) = findLotto(correct)
+    println("Lotto numbers were: ${correct}, you got ${numCommon(correct,guess)} correct. \nComputer guessed in ${steps} tries ${lotto}")
     println("Do you want to play again? (Y/N)")
     var more = readLine()
     if (more == "Y" || more == "y") playLotto()
@@ -124,17 +125,26 @@ fun findLotto(lotto: List<Int>): Pair<Int, List<Int>> {
     Return the number of steps taken to find the correct lotto
     numbers as well as the list of correct numbers as a Pair.
     */
-    return Pair(0, listOf()) // comment this out when implementing the function
+    var steps = 0
+    var result: Int? = null
+    var compGuess: List<Int>
+    do{
+        compGuess = pickNDistinct(1,40,7)
+        steps++
+        result = lottoResult(compGuess, lotto)
+    } while(result != 7)
+    return Pair(steps,lotto)
+    //return Pair(0, listOf()) // comment this out when implementing the function
 }
 
-/*
+
 fun lottoResult(guess: List<Int>, lotto: List<Int>) =
     if (numDistinct(guess) == 7 && numDistinct(lotto) == 7 && (guess + lotto).all { it in (1..40) }) {
         numCommon(guess, lotto)
     } else {
         null
     }
-*/
+
 
 fun main(args: Array<String>) {
   playLotto()
