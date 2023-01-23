@@ -78,7 +78,7 @@ fun readNDistinct(low: Int, high: Int, n: Int): List<Int>{
         numbers = readLine()?.split(",")?.map{it.toIntOrNull()}?.filterNotNull()?.toSet()?.toList()
         if (numbers?.indexOfFirst{it > high} != null) numbers = readLine()?.split(",")?.map{it.toIntOrNull()}?.filterNotNull()?.toSet()?.toList()
     } while(numbers?.size != n)
-    return numbers?.toList() ?: listOf(0,0,0)
+    return numbers ?: listOf(0,0,0)
 }
 
 /*
