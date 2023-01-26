@@ -128,15 +128,27 @@ fun findLotto(lotto: List<Int>): Pair<Int, List<Int>> {
     var steps = 0
     var result: Int? = null
     var compGuess: List<Int>
+    var correct = mutableListOf<Int>()
+    var answer = mutableSetOf<Int>()
     do{
         compGuess = pickNDistinct(1,40,7)
         steps++
         result = lottoResult(compGuess, lotto)
-    } while(result != 7)
-    return Pair(steps,lotto)
-    //return Pair(0, listOf()) // comment this out when implementing the function
+    } while(result != 0)
+    
+    do{
+        correct = compGuess.toMutableList()
+        correct.removeAt(6)
+        correct.add(pickNumber())
+        result = lottoResult(correct, lotto)
+        if (result == 1){
+            answer.add(correct.last())
+            steps++
+        } else steps++
+    } while (answer.size != 7)
+    
+    return Pair(steps, answer.sorted().toList())
 }
-
 
 fun lottoResult(guess: List<Int>, lotto: List<Int>) =
     if (numDistinct(guess) == 7 && numDistinct(lotto) == 7 && (guess + lotto).all { it in (1..40) }) {
@@ -144,7 +156,6 @@ fun lottoResult(guess: List<Int>, lotto: List<Int>) =
     } else {
         null
     }
-
 
 fun main(args: Array<String>) {
   playLotto()
